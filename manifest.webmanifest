@@ -1,0 +1,18 @@
+{
+  "id": "./raport-kierowcow",
+  "name": "Ewidencja i raporty pracy kierowców – M&D TRANS",
+  "short_name": "Raport M&D",
+  "description": "Ewidencja czasu pracy kierowców i raporty PDF/Excel dla klienta.",
+  "lang": "pl",
+  "start_url": "./Raport_kierowcow_1_1_Ins_phone.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f3f5f8",
+  "theme_color": "#16324f",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

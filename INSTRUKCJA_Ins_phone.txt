@@ -1,0 +1,53 @@
+RAPORT KIEROWCÓW M&D TRANS – wersja 1.1 do instalacji na telefonie (PWA)
+=========================================================================
+
+ZAWARTOŚĆ FOLDERU (wszystkie pliki muszą leżeć razem, w jednym folderze):
+  Raport_kierowcow_1_1_Ins_phone.html  – program
+  index.html                           – przekierowanie na program (krótszy adres)
+  manifest.webmanifest                 – opis aplikacji (nazwa, ikona, kolory)
+  sw.js                                – service worker: praca offline i aktualizacje
+  icon-192.png, icon-512.png, icon-maskable-512.png, apple-touch-icon.png – ikony
+
+1. WYSTAWIENIE NA SERWER (raz)
+   Telefony instalują aplikację tylko z adresu https://. Otwarcie pliku z dysku
+   lub z aplikacji Pliki NIE pozwoli zainstalować programu.
+   - Wgraj cały folder na dowolny hosting z HTTPS, np. podkatalog na serwerze
+     X SYSTEM:  https://<domena>/raport-md/
+     albo GitHub Pages (repozytorium z tymi plikami → Settings → Pages).
+   - Typy MIME: .webmanifest = application/manifest+json, .js = text/javascript
+     (zwykle ustawione domyślnie).
+   - sw.js nie powinien być długo cache'owany przez serwer
+     (Cache-Control: no-cache dla sw.js), żeby aktualizacje docierały od razu.
+   - Na serwerze jest tylko program. Wpisy, kierowcy i stawki zostają
+     w telefonie – nic nie jest wysyłane na serwer.
+
+2. INSTALACJA – iPhone / iPad (Safari)
+   - Otwórz adres w Safari → przycisk Udostępnij (kwadrat ze strzałką)
+     → „Do ekranu początkowego” → Dodaj.
+   - Uruchamiaj ikoną „Raport M&D”.
+   - Ważne: w iOS aplikacja z ekranu początkowego ma własne dane, osobne od Safari.
+     Wprowadzaj dane już w zainstalowanej aplikacji.
+
+3. INSTALACJA – Android (Chrome)
+   - Otwórz adres w Chrome → „Zainstaluj aplikację” (przycisk 📲 w programie
+     albo menu ⋮ → Zainstaluj aplikację / Dodaj do ekranu głównego).
+
+4. INSTALACJA – Windows (Chrome / Edge) – opcjonalnie
+   - Ikona instalacji na pasku adresu albo przycisk 📲 w programie.
+
+5. JAK DZIAŁA PO INSTALACJI
+   - Uruchamia się bez paska przeglądarki, działa bez internetu.
+   - PDF: Otwórz / Wyślij e-mailem (arkusz udostępniania → Mail, Gmail, Outlook)
+     / Zapisz plik (iOS: „Zachowaj w Plikach”, Android: folder Download).
+   - Każde urządzenie ma osobne dane. Przenoszenie: Ustawienia → Zapisz kopię
+     danych (.json) → na drugim urządzeniu Wczytaj kopię.
+   - Rób kopię .json regularnie – usunięcie aplikacji z telefonu usuwa jej dane.
+
+6. AKTUALIZACJA DO NOWEJ WERSJI
+   - Podmień pliki na serwerze. W sw.js zmień nazwę CACHE
+     (np. 'raport-kierowcow-1.2.0') i listę ASSETS, jeśli zmieniła się nazwa
+     pliku programu; w manifest.webmanifest zaktualizuj start_url,
+     w index.html – adres przekierowania. Pole "id" w manifeście zostaw bez zmian
+     – dzięki temu telefony traktują nową wersję jako tę samą aplikację.
+   - Po uruchomieniu program pobierze nową wersję w tle i pokaże komunikat
+     „Pobrano nową wersję – uruchom ponownie”. Dane zostają.
